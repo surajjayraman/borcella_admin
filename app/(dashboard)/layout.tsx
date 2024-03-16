@@ -6,7 +6,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Borcelle - Admin Auth",
+  title: "Borcelle - Admin Dashboard",
   description: "Admin dasboard to manage Borcelle's data",
 };
 
