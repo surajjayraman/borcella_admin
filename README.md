@@ -5,6 +5,8 @@
 
 
 ---
+A Full stack integrated E-Commerce website with an Admin Dashboard using Next.js 14, Stripe for payment, TypeScript, MongoDB for all database management, Clerk for authentication and user management, React-Hook-Form for form validation, Tailwind CSS & Shadcn UI for a stunning responsive UI design, and Next Cloudinary for image upload and storage.
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
