@@ -1,3 +1,5 @@
+"use client";
+
 import { UserButton } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
@@ -16,7 +18,9 @@ const LeftSideBar = () => {
           <Link
             href={link.url}
             key={link.label}
-            className="flex gap-4 text-body-medium"
+            className={`flex gap-4 text-body-medium ${
+              pathName === link.url ? "text-blue-1" : "text-grey-1"
+            }`}
           >
             {link.icon}
             <p>{link.label}</p>
