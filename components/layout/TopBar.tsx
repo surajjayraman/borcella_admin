@@ -2,7 +2,7 @@ import React from 'react'
 
 const TopBar = () => {
   return (
-    <div>TopBar</div>
+    <div className='sticky top-0'>TopBar</div>
   )
 }
 
