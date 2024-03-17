@@ -16,7 +16,6 @@ const TopBar = () => {
             key={link.label}
             className="flex gap-4 text-body-medium"
           >
-            {link.icon}
             <p>{link.label}</p>
           </Link>
         ))}
