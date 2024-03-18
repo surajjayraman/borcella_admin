@@ -1,9 +1,13 @@
-import React from 'react'
+import { CldUploadWidget } from "next-cloudinary";
+
+<CldUploadWidget uploadPreset="<Your Upload Preset>">
+  {({ open }) => {
+    return <button onClick={() => open()}>Upload an Image</button>;
+  }}
+</CldUploadWidget>;
 
 const ImageUpload = () => {
-  return (
-    <div>ImageUpload</div>
-  )
-}
+  return <div>ImageUpload</div>;
+};
 
-export default ImageUpload
+export default ImageUpload;
