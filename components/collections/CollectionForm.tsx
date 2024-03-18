@@ -13,6 +13,16 @@ const formSchema = z.object({
 });
 
 const CollectionForm = () => {
+  // 1. Define your form.
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      title: "",
+      description: "",
+      image: "",
+    },
+  });
+
   return (
     <div className="p-10">
       <p className="text-heading2-bold">Create Collection</p>
