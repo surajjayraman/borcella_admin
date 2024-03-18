@@ -23,6 +23,11 @@ const CollectionForm = () => {
     },
   });
 
+  // 2. Define a submit handler.
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    console.log(values);
+  };
+
   return (
     <div className="p-10">
       <p className="text-heading2-bold">Create Collection</p>
