@@ -1,11 +1,15 @@
 "use client";
 
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 import { Separator } from "../ui/separator";
 
 const formSchema = z.object({
-  username: z.string().min(2).max(50),
+  title: z.string().min(2).max(20),
+  description: z.string().min(2).max(500).trim(),
+  image: z.string(),
 });
 
 const CollectionForm = () => {
