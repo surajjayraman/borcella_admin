@@ -14,6 +14,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { useRouter } from "next/navigation";
 
 import { Separator } from "../ui/separator";
 import { Textarea } from "../ui/textarea";
@@ -26,6 +27,7 @@ const formSchema = z.object({
 });
 
 const CollectionForm = () => {
+  const router = useRouter();
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -93,9 +95,17 @@ const CollectionForm = () => {
             )}
           />
 
-          <div>
-            <Button type="submit">Submit</Button>
-            <Button type="submit">Discard</Button>
+          <div className="flex gap-10">
+            <Button type="submit" className="bg-blue-1 text-white">
+              Submit
+            </Button>
+            <Button
+              type="button"
+              className="bg-blue-1 text-white"
+              onClick={() => router.push("/collections")}
+            >
+              Discard
+            </Button>
           </div>
         </form>
       </Form>
