@@ -62,7 +62,7 @@ const CollectionForm = () => {
       }
     } catch (err) {
       console.log("[CollectionForm_onSubmit]", err);
-      toast.error("Failed to create collection");
+      toast.error("Something went wrong! Please try again.");
     }
   };
 
