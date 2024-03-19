@@ -19,6 +19,7 @@ import { useRouter } from "next/navigation";
 import { Separator } from "../ui/separator";
 import { Textarea } from "../ui/textarea";
 import ImageUpload from "../custom ui/ImageUpload";
+import { useState } from "react";
 
 const formSchema = z.object({
   title: z.string().min(2).max(20),
@@ -28,6 +29,8 @@ const formSchema = z.object({
 
 const CollectionForm = () => {
   const router = useRouter();
+  const [loading, setLoading] = useState(true);
+
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -41,6 +44,18 @@ const CollectionForm = () => {
   // 2. Define a submit handler.
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     console.log(values);
+
+    try {
+      const res = await fetch("/api/collections", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      });
+    } catch (err) {
+      console.log("[CollectionForm_onSubmit]", err);
+    }
   };
 
   return (
