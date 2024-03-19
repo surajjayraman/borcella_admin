@@ -20,6 +20,7 @@ import { Separator } from "../ui/separator";
 import { Textarea } from "../ui/textarea";
 import ImageUpload from "../custom ui/ImageUpload";
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 const formSchema = z.object({
   title: z.string().min(2).max(20),
@@ -56,9 +57,12 @@ const CollectionForm = () => {
 
       if (res.ok) {
         router.push("/collections");
+        toast.success("Collection created successfully");
+        setLoading(false);
       }
     } catch (err) {
       console.log("[CollectionForm_onSubmit]", err);
+      toast.error("Failed to create collection");
     }
   };
 
