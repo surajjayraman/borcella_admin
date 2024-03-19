@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
-const page = () => {
-  return (
-    <div>page</div>
-  )
-}
+const Collections = () => {
+  return <div>Collections</div>;
+};
 
-export default page
+export default Collections;
