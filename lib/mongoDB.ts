@@ -2,19 +2,23 @@ import mongoose from "mongoose";
 
 let isConnected: boolean = false;
 
-export const connectToDB = async () => {
-    if (isConnected) {
-        return;
-    }
-    
-    const db = await mongoose.connect(process.env.MONGODB_URI, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-        useFindAndModify: false,
-        useCreateIndex: true,
+export const connectToDB = async (): Promise<void> => {
+  mongoose.set("strictQuery", true);
+  if (isConnected) {
+    console.log("MongoDB is already connected");
+    return;
+  }
+
+  try {
+    await mongoose.connect(process.env.MONGO_URL || "", {
+      dbName: "Borcelle_Admin",
     });
-    
-    isConnected = db.connections[0].readyState;
-}
-    
+
+    isConnected = true;
+    console.log("MongoDB is connected");
+  } catch (error) {
+    console.log("MongoDB connection error", error);
+  }
+};
+
 export default connectToDB;
