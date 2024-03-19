@@ -93,7 +93,10 @@ const CollectionForm = () => {
             )}
           />
 
-          <Button type="submit">Submit</Button>
+          <div>
+            <Button type="submit">Submit</Button>
+            <Button type="submit">Discard</Button>
+          </div>
         </form>
       </Form>
     </div>
