@@ -53,6 +53,10 @@ const CollectionForm = () => {
         },
         body: JSON.stringify(values),
       });
+
+      if (res.ok) {
+        router.push("/collections");
+      }
     } catch (err) {
       console.log("[CollectionForm_onSubmit]", err);
     }
