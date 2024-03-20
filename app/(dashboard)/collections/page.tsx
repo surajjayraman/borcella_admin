@@ -1,7 +1,37 @@
-import React from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 
 const Collections = () => {
-  return <div>Collections</div>;
+  const [loading, setLoading] = useState(true);
+  const [collections, setCollections] = useState([]);
+
+  useEffect(() => {
+    const getCollections = async () => {
+      try {
+        const res = await fetch("/api/collections", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        const data = await res.json();
+        setCollections(data);
+        setLoading(false);
+      } catch (err) {
+        console.log("[Collections_getCollections]", err);
+      }
+    };
+
+    getCollections();
+  }, []);
+
+  return (
+    <div>
+      {collections.map((item, index) => (
+        <div key={index}>{item.title}</div>
+      ))}
+    </div>
+  );
 };
 
 export default Collections;
