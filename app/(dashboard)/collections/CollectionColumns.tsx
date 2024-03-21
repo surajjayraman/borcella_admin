@@ -4,15 +4,16 @@ import { ColumnDef } from "@tanstack/react-table";
 
 export const columns: ColumnDef<CollectionType>[] = [
   {
-    accessorKey: "status",
-    header: "Status",
+    accessorKey: "title",
+    header: "Title",
   },
   {
-    accessorKey: "email",
-    header: "Email",
+    accessorKey: "products",
+    header: "Products",
   },
-  {
-    accessorKey: "amount",
-    header: "Amount",
+    {
+        id: "actions",
+        cell: ({ row }) => <Delete />
+
   },
 ];
