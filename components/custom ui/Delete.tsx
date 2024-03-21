@@ -1,10 +1,12 @@
-import React from 'react'
+import { Trash } from "lucide-react";
+import { Button } from "../ui/button";
 
 const Delete = () => {
   return (
-    <div>Delete</div>
-  )
-}
+    <Button>
+      <Trash />
+    </Button>
+  );
+};
 
-export default Delete
-
+export default Delete;
