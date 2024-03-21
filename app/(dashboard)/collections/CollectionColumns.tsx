@@ -1,9 +1,18 @@
-import React from 'react'
+"use client";
 
-const CollectionColumns = () => {
-  return (
-    <div>CollectionColumns</div>
-  )
-}
+import { ColumnDef } from "@tanstack/react-table";
 
-export default CollectionColumns
+export const columns: ColumnDef<CollectionType>[] = [
+  {
+    accessorKey: "status",
+    header: "Status",
+  },
+  {
+    accessorKey: "email",
+    header: "Email",
+  },
+  {
+    accessorKey: "amount",
+    header: "Amount",
+  },
+];
