@@ -1,4 +1,6 @@
 "use client";
+import { columns } from "@/components/collections/CollectionColumns";
+import { DataTable } from "@/components/custom ui/DataTable";
 import React, { useEffect, useState } from "react";
 
 const Collections = () => {
@@ -25,7 +27,11 @@ const Collections = () => {
     getCollections();
   }, []);
 
-  return <div>Collections</div>;
+  return (
+    <div>
+      <DataTable columns={columns} data={collections} />
+    </div>
+  );
 };
 
 export default Collections;
