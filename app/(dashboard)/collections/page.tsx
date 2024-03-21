@@ -28,9 +28,12 @@ const Collections = () => {
   }, []);
 
   return (
-    <div>
+    <>
+      <div className="flex items-center justify-between">
+        <p className="text-heading2-bold">Collections</p>
+      </div>
       <DataTable columns={columns} data={collections} />
-    </div>
+    </>
   );
 };
 
