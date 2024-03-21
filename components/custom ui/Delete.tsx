@@ -3,8 +3,8 @@ import { Button } from "../ui/button";
 
 const Delete = () => {
   return (
-    <Button>
-      <Trash />
+    <Button className="bg-red-1 text-white">
+      <Trash className="h-4 w-4" />
     </Button>
   );
 };
