@@ -25,13 +25,7 @@ const Collections = () => {
     getCollections();
   }, []);
 
-  return (
-    <div>
-      {collections.map((item, index) => (
-        <div key={index}>{item.title}</div>
-      ))}
-    </div>
-  );
+  return <div>Collections</div>;
 };
 
 export default Collections;
