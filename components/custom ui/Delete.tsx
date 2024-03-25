@@ -31,13 +31,14 @@ const Delete: React.FC<DeleteProps> = ({ id }) => {
       });
 
       if (res.ok) {
-        window.location.href = "/collections";
+        window.location.href = ("/collections");
         toast.success("Collection deleted successfully.");
       }
     } catch (error) {
       console.log("collectionId_DELETE", error);
       toast.error("Something went wrong! Please try again.");
     }
+
     setLoading(false);
   };
   return (
@@ -59,8 +60,8 @@ const Delete: React.FC<DeleteProps> = ({ id }) => {
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction className="bg-red-1 text-white">
-            Continue
+          <AlertDialogAction className="bg-red-1 text-white" onClick={onDelete}>
+            Delete
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
