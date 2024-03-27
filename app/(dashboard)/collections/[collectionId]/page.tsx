@@ -1,5 +1,7 @@
 "use client";
 
+import CollectionForm from "@/components/collections/CollectionForm";
+import Loader from "@/components/custom ui/Loader";
 import { useEffect, useState } from "react";
 
 const CollectionDetails = ({
@@ -31,7 +33,11 @@ const CollectionDetails = ({
     getCollectionDetails();
   }, [params.collectionId]);
 
-  return <div>CollectionDetails</div>;
+  return loading ? (
+    <Loader />
+  ) : (
+    <CollectionForm initialData={collectionDetails} />
+  );
 };
 
 export default CollectionDetails;
