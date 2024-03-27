@@ -14,7 +14,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 
 import { Separator } from "../ui/separator";
 import { Textarea } from "../ui/textarea";
@@ -34,16 +34,19 @@ interface CollectionFormProps {
 
 const CollectionForm: React.FC<CollectionFormProps> = ({ initialData }) => {
   const router = useRouter();
+  const params = useParams();
   const [loading, setLoading] = useState(true);
 
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: initialData ? initialData :{
-      title: "",
-      description: "",
-      image: "",
-    },
+    defaultValues: initialData
+      ? initialData
+      : {
+          title: "",
+          description: "",
+          image: "",
+        },
   });
 
   // 2. Define a submit handler.
@@ -51,7 +54,11 @@ const CollectionForm: React.FC<CollectionFormProps> = ({ initialData }) => {
     console.log(values);
 
     try {
-      const res = await fetch("/api/collections", {
+      const url = initialData
+        ? `/api/collections/${params.collectionId}`
+        : "/api/collections";
+
+      const res = await fetch(url, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -61,7 +68,11 @@ const CollectionForm: React.FC<CollectionFormProps> = ({ initialData }) => {
 
       if (res.ok) {
         router.push("/collections");
-        toast.success("Collection created successfully");
+        toast.success(
+          `Collection ${initialData ? "updated" : "created"} successfully`
+        );
+        window.location.href = "/collections";
+        router.push("/collections");
         setLoading(false);
       }
     } catch (err) {
@@ -72,7 +83,11 @@ const CollectionForm: React.FC<CollectionFormProps> = ({ initialData }) => {
 
   return (
     <div className="p-10">
-      <p className="text-heading2-bold">Create Collection</p>
+      {initialData ? (
+        <p className="text-heading2-bold">Edit Collection</p>
+      ) : (
+        <p className="text-heading2-bold">Create Collection</p>
+      )}
       <Separator className="bg-grey-1 mt-4 mb-7" />
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
