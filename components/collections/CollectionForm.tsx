@@ -21,6 +21,7 @@ import { Textarea } from "../ui/textarea";
 import ImageUpload from "../custom ui/ImageUpload";
 import { useState } from "react";
 import toast from "react-hot-toast";
+import Delete from "../custom ui/Delete";
 
 const formSchema = z.object({
   title: z.string().min(2).max(20),
@@ -84,7 +85,10 @@ const CollectionForm: React.FC<CollectionFormProps> = ({ initialData }) => {
   return (
     <div className="p-10">
       {initialData ? (
-        <p className="text-heading2-bold">Edit Collection</p>
+        <div className="flex items-center justify-between">
+          <p className="text-heading2-bold">Edit Collection</p>
+          <Delete id={params.collectionId.toString()} />
+        </div>
       ) : (
         <p className="text-heading2-bold">Create Collection</p>
       )}
