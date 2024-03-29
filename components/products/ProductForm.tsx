@@ -26,7 +26,7 @@ import Delete from "../custom ui/Delete";
 const formSchema = z.object({
   title: z.string().min(2).max(20),
   description: z.string().min(2).max(500).trim(),
-  image: z.string(),
+  media: z.array(z.string()),
 });
 
 interface ProductFormProps {
