@@ -22,6 +22,7 @@ import ImageUpload from "../custom ui/ImageUpload";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import Delete from "../custom ui/Delete";
+import MultiText from "../custom ui/MultiText";
 
 const formSchema = z.object({
   title: z.string().min(2).max(20),
@@ -228,6 +229,20 @@ const ProductForm: React.FC<ProductFormProps> = ({ initialData }) => {
                       {...field}
                       onKeyDown={handleKeyPress}
                     />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="tags"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Tags</FormLabel>
+                  <FormControl>
+                    <MultiText />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
