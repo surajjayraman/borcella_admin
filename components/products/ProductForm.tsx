@@ -177,6 +177,24 @@ const ProductForm: React.FC<ProductFormProps> = ({ initialData }) => {
             )}
           />
 
+          <FormField
+            control={form.control}
+            name="price"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Price ($)</FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder="Price"
+                    {...field}
+                    onKeyDown={handleKeyPress}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
           <div className="flex gap-10">
             <Button type="submit" className="bg-blue-1 text-white">
               Submit
