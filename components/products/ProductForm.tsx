@@ -109,7 +109,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ initialData }) => {
     <div className="p-10">
       {initialData ? (
         <div className="flex items-center justify-between">
-          <p className="text-heading2-bold">Edit Collection</p>
+          <p className="text-heading2-bold">Edit Product</p>
           <Delete id={params.collectionId.toString()} />
         </div>
       ) : (
@@ -157,15 +157,19 @@ const ProductForm: React.FC<ProductFormProps> = ({ initialData }) => {
 
           <FormField
             control={form.control}
-            name="image"
+            name="media"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Image</FormLabel>
                 <FormControl>
                   <ImageUpload
-                    value={field.value ? [field.value] : []}
-                    onChange={(url) => field.onChange(url)}
-                    onRemove={() => field.onChange("")}
+                    value={field.value}
+                    onChange={(url) => field.onChange([...field.value, url])}
+                    onRemove={(url) =>
+                      field.onChange([
+                        ...field.value.filter((image) => image !== url),
+                      ])
+                    }
                   />
                 </FormControl>
                 <FormMessage />
