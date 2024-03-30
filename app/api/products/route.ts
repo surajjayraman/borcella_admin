@@ -1,0 +1,49 @@
+import { auth } from "@clerk/nextjs";
+import { NextRequest, NextResponse } from "next/server";
+
+import connectToDB from "@/lib/mongoDB";
+
+export const POST = async (req: NextRequest) => {
+  try {
+    //Handle the form submission.
+    const { userId } = auth();
+
+    if (!userId) {
+      return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
+    }
+
+    await connectToDB();
+    const {
+      title,
+      description,
+      media,
+      category,
+      collections,
+      tags,
+      sizes,
+      colors,
+      price,
+      expense,
+    } = await req.json();
+
+    if (
+      !title ||
+      !description ||
+      !media ||
+      !category ||
+      !price ||
+      !expense
+    ) {
+      return NextResponse.json(
+        { message: "Not enoough data to create a Product" },
+        { status: 400 }
+      );
+    }
+  } catch (error) {
+    console.log("[products_POST]", error);
+    return NextResponse.json(
+      { message: "Internal Server Error" },
+      { status: 500 }
+    );
+  }
+};

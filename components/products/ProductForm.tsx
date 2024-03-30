@@ -114,7 +114,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ initialData }) => {
           <Delete id={params.collectionId.toString()} />
         </div>
       ) : (
-        <p className="text-heading2-bold">Create Collection</p>
+        <p className="text-heading2-bold">Create Product</p>
       )}
       <Separator className="bg-grey-1 mt-4 mb-7" />
       <Form {...form}>
