@@ -1,10 +1,10 @@
 interface MultiTextProps {
-  name: string;
-  label: string;
   placeholder: string;
-  form: any;
+  value: string[];
+  onChange: (value: string) => void;
+  onRemove: (value: string) => void;
 }
-const MultiText = () => {
+const MultiText: React.FC<MultiTextProps> = ({placeholder, value, onChange, onRemove}) => {
   return <div>MultiText</div>;
 };
 
