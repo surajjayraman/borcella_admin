@@ -2,6 +2,7 @@ import { auth } from "@clerk/nextjs";
 import { NextRequest, NextResponse } from "next/server";
 
 import connectToDB from "@/lib/mongoDB";
+import Product from "@/lib/models/Product";
 
 export const POST = async (req: NextRequest) => {
   try {
@@ -26,33 +27,30 @@ export const POST = async (req: NextRequest) => {
       expense,
     } = await req.json();
 
-    if (
-      !title ||
-      !description ||
-      !media ||
-      !category ||
-      !price ||
-      !expense
-    ) {
+    if (!title || !description || !media || !category || !price || !expense) {
       return NextResponse.json(
         { message: "Not enough data to create a Product" },
         { status: 400 }
       );
     }
-      
-      // Create a new product
-      const newProduct = await Product.create({
-        title,
-        description,
-        media,
-        category,
-        collections,
-        tags,
-        sizes,
-        colors,
-        price,
-        expense,
-      });
+
+    // Create a new product
+    const newProduct = await Product.create({
+      title,
+      description,
+      media,
+      category,
+      collections,
+      tags,
+      sizes,
+      colors,
+      price,
+      expense,
+    });
+
+    await newProduct.save();
+
+    return NextResponse.json(newProduct, { status: 200 });
   } catch (error) {
     console.log("[products_POST]", error);
     return NextResponse.json(
