@@ -35,10 +35,24 @@ export const POST = async (req: NextRequest) => {
       !expense
     ) {
       return NextResponse.json(
-        { message: "Not enoough data to create a Product" },
+        { message: "Not enough data to create a Product" },
         { status: 400 }
       );
     }
+      
+      // Create a new product
+      const newProduct = await Product.create({
+        title,
+        description,
+        media,
+        category,
+        collections,
+        tags,
+        sizes,
+        colors,
+        price,
+        expense,
+      });
   } catch (error) {
     console.log("[products_POST]", error);
     return NextResponse.json(
