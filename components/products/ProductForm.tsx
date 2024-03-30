@@ -185,7 +185,27 @@ const ProductForm: React.FC<ProductFormProps> = ({ initialData }) => {
                 <FormLabel>Price ($)</FormLabel>
                 <FormControl>
                   <Input
+                    type="number"
                     placeholder="Price"
+                    {...field}
+                    onKeyDown={handleKeyPress}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="expense"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Expense ($)</FormLabel>
+                <FormControl>
+                  <Input
+                    type="number"
+                    placeholder="Expense"
                     {...field}
                     onKeyDown={handleKeyPress}
                   />
