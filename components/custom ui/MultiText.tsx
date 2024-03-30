@@ -43,6 +43,7 @@ const MultiText: React.FC<MultiTextProps> = ({
             {tag}
             <Button
               className="ml-1 rounded-full outline-none hover:bg-red-1"
+              size="sm"
               onClick={() => onRemove(tag)}
             >
               <X className="h-3 w-3" />
