@@ -80,8 +80,8 @@ const ProductForm: React.FC<ProductFormProps> = ({ initialData }) => {
 
     try {
       const url = initialData
-        ? `/api/collections/${params.collectionId}`
-        : "/api/collections";
+        ? `/api/products/${params.collectionId}`
+        : "/api/products";
 
       const res = await fetch(url, {
         method: "POST",
@@ -92,16 +92,15 @@ const ProductForm: React.FC<ProductFormProps> = ({ initialData }) => {
       });
 
       if (res.ok) {
-        router.push("/collections");
         toast.success(
-          `Collection ${initialData ? "updated" : "created"} successfully`
+          `Product ${initialData ? "updated" : "created"} successfully`
         );
-        window.location.href = "/collections";
-        router.push("/collections");
+        window.location.href = "/products";
+        router.push("/products");
         setLoading(false);
       }
     } catch (err) {
-      console.log("[CollectionForm_onSubmit]", err);
+      console.log("[ProductForm_onSubmit]", err);
       toast.error("Something went wrong! Please try again.");
     }
   };

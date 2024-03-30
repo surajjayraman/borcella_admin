@@ -78,7 +78,6 @@ const CollectionForm: React.FC<CollectionFormProps> = ({ initialData }) => {
       });
 
       if (res.ok) {
-        router.push("/collections");
         toast.success(
           `Collection ${initialData ? "updated" : "created"} successfully`
         );
