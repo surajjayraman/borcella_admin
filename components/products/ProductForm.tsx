@@ -286,6 +286,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ initialData }) => {
                   <FormControl>
                     <MultiSelect
                       placeholder="Collections"
+                      collections={collections}
                       value={field.value}
                       onChange={(_id) => field.onChange([...field.value, _id])}
                       onRemove={(_id) =>

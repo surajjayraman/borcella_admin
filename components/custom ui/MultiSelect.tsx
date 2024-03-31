@@ -1,9 +1,21 @@
-import React from 'react'
+"use client";
 
-const MultiSelect = () => {
-  return (
-    <div>MultiSelect</div>
-  )
+interface MultiSelectProps {
+  placeholder: string;
+  collections: CollectionType[];
+  value: string[];
+  onChange: (value: string) => void;
+  onRemove: (value: string) => void;
 }
 
-export default MultiSelect
+const MultiSelect: React.FC<MultiSelectProps> = ({
+  placeholder,
+  collections,
+  value,
+  onChange,
+  onRemove,
+}) => {
+  return <div>MultiSelect</div>;
+};
+
+export default MultiSelect;
