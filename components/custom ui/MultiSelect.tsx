@@ -11,7 +11,7 @@ import {
   CommandSeparator,
   CommandShortcut,
 } from "@/components/ui/command";
-
+import { useState } from "react";
 
 interface MultiSelectProps {
   placeholder: string;
@@ -28,7 +28,31 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
   onChange,
   onRemove,
 }) => {
-  return <div>MultiSelect</div>;
+  const [inputValue, setInputValue] = useState("");
+
+  return (
+    <Command>
+      <CommandInput
+        placeholder={placeholder}
+        value={inputValue}
+        onValueChange={setInputValue}
+      />
+      <CommandList>
+        <CommandEmpty>No results found.</CommandEmpty>
+        <CommandGroup heading="Suggestions">
+          <CommandItem>Calendar</CommandItem>
+          <CommandItem>Search Emoji</CommandItem>
+          <CommandItem>Calculator</CommandItem>
+        </CommandGroup>
+        <CommandSeparator />
+        <CommandGroup heading="Settings">
+          <CommandItem>Profile</CommandItem>
+          <CommandItem>Billing</CommandItem>
+          <CommandItem>Settings</CommandItem>
+        </CommandGroup>
+      </CommandList>
+    </Command>
+  );
 };
 
 export default MultiSelect;
