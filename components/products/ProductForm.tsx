@@ -23,6 +23,7 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import Delete from "../custom ui/Delete";
 import MultiText from "../custom ui/MultiText";
+import MultiSelect from "../custom ui/MultiSelect";
 
 const formSchema = z.object({
   title: z.string().min(2).max(20),
@@ -265,13 +266,15 @@ const ProductForm: React.FC<ProductFormProps> = ({ initialData }) => {
                 <FormItem>
                   <FormLabel>Collections</FormLabel>
                   <FormControl>
-                    <MultiText
+                    <MultiSelect
                       placeholder="Collections"
                       value={field.value}
-                      onChange={(tag) => field.onChange([...field.value, tag])}
-                      onRemove={(tag) =>
+                      onChange={(_id) => field.onChange([...field.value, _id])}
+                      onRemove={(_id) =>
                         field.onChange([
-                          ...field.value.filter((item) => item !== tag),
+                          ...field.value.filter(
+                            (collectionId) => collectionId !== _id
+                          ),
                         ])
                       }
                     />
