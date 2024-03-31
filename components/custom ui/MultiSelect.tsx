@@ -74,12 +74,11 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
           onFocus={() => setOpen(true)}
         />
       </div>
-
-      <CommandList className="overflow-visible bg-white">
-        <div className="relative mt-2">
+      <div className="relative mt-2">
+        <CommandList className="overflow-visible bg-white">
           {open && (
-            <CommandGroup className="absolute w-full z-30 top-0 overflow-auto border rounded-md shadow-md">
-              {selectables?.map((collection) => (
+            <CommandGroup className="absolute w-full z-10 top-0 overflow-auto border rounded-md shadow-md">
+              {selectables.map((collection) => (
                 <CommandItem
                   key={collection._id}
                   onMouseDown={(e) => e.preventDefault()}
@@ -94,8 +93,8 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
               ))}
             </CommandGroup>
           )}
-        </div>
-      </CommandList>
+        </CommandList>
+      </div>
     </Command>
   );
 };
