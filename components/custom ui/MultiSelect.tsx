@@ -29,6 +29,7 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
   onRemove,
 }) => {
   const [inputValue, setInputValue] = useState("");
+  const [open, setOpen] = useState(false);
 
   return (
     <Command>
@@ -36,21 +37,26 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
         placeholder={placeholder}
         value={inputValue}
         onValueChange={setInputValue}
+        onBlur={() => setOpen(false)}
+        onFocus={() => setOpen(true)}
       />
-      <CommandList>
-        <CommandEmpty>No results found.</CommandEmpty>
-        <CommandGroup heading="Suggestions">
-          <CommandItem>Calendar</CommandItem>
-          <CommandItem>Search Emoji</CommandItem>
-          <CommandItem>Calculator</CommandItem>
-        </CommandGroup>
-        <CommandSeparator />
-        <CommandGroup heading="Settings">
-          <CommandItem>Profile</CommandItem>
-          <CommandItem>Billing</CommandItem>
-          <CommandItem>Settings</CommandItem>
-        </CommandGroup>
-      </CommandList>
+      <div className="relative mt-2">
+        {open && (
+          <CommandGroup className="absolute w-full z-10 top-0 overflow-auto border rounded-md shadow-md">
+            {collections.map((collection) => (
+              <CommandItem
+                key={collection._id}
+                onClick={() => {
+                  onChange(collection._id);
+                  setInputValue("");
+                }}
+              >
+                {collection.title}
+              </CommandItem>
+            ))}
+          </CommandGroup>
+        )}
+      </div>
     </Command>
   );
 };
