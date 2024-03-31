@@ -19,7 +19,7 @@ import { useParams, useRouter } from "next/navigation";
 import { Separator } from "../ui/separator";
 import { Textarea } from "../ui/textarea";
 import ImageUpload from "../custom ui/ImageUpload";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import Delete from "../custom ui/Delete";
 import MultiText from "../custom ui/MultiText";
@@ -46,6 +46,24 @@ const ProductForm: React.FC<ProductFormProps> = ({ initialData }) => {
   const router = useRouter();
   const params = useParams();
   const [loading, setLoading] = useState(true);
+  const [collections, setCollections] = useState<CollectionType[]>([]);
+
+  useEffect(() => {
+    const getCollections = async () => {
+      try {
+        const res = await fetch("/api/collections", {
+          method: "GET",
+        });
+        const data = await res.json();
+        setCollections(data);
+        setLoading(false);
+      } catch (err) {
+        console.log("[ProductForm_getCollections]", err);
+        toast.error("Something went wrong! Please try again.");
+      }
+    };
+    getCollections();
+  }, []);
 
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
