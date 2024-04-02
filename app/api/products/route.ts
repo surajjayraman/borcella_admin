@@ -59,3 +59,20 @@ export const POST = async (req: NextRequest) => {
     );
   }
 };
+
+export const GET = async (req: NextRequest) => {
+  try {
+    await connectToDB();
+    const products = await Product.find()
+      .sort({ createdAt: "desc" })
+      .populate({ path: "collections", model: "Collection" });
+
+    return NextResponse.json(products, { status: 200 });
+  } catch (error) {
+    console.log("[products_GET]", error);
+    return NextResponse.json(
+      { message: "Internal Server Error" },
+      { status: 500 }
+    );
+  }
+};
