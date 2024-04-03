@@ -11,7 +11,7 @@ import { useEffect, useState } from "react";
 
 const Products = () => {
   const [loading, setLoading] = useState(true);
-  const [products, setProducts] = useState<ProductType[] | null>([]);
+  const [products, setProducts] = useState<ProductType[]>([]);
   const router = useRouter();
 
   useEffect(() => {

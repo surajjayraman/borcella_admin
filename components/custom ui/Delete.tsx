@@ -27,16 +27,17 @@ const Delete: React.FC<DeleteProps> = ({ item, id }) => {
 
   const onDelete = async () => {
     try {
-      const res = await fetch(`/api/collections/${id}`, {
+      const itemType = item === "product" ? "products" : "collections";
+      const res = await fetch(`/api/${itemType}/${id}`, {
         method: "DELETE",
       });
 
       if (res.ok) {
-        window.location.href = "/collections";
-        toast.success("Collection deleted successfully.");
+        window.location.href = `/${itemType}`;
+        toast.success(`${item} deleted successfully.`);
       }
     } catch (error) {
-      console.log("collectionId_DELETE", error);
+      console.log("onDelete(): ", error);
       toast.error("Something went wrong! Please try again.");
     }
 
@@ -55,8 +56,8 @@ const Delete: React.FC<DeleteProps> = ({ item, id }) => {
             Are you absolutely sure?
           </AlertDialogTitle>
           <AlertDialogDescription>
-            This action cannot be undone. This will permanently delete your
-            collection.
+            This action cannot be undone. This will permanently delete your{" "}
+            {item}.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
