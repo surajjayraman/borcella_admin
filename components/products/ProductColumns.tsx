@@ -23,13 +23,19 @@ export const columns: ColumnDef<ProductType>[] = [
     header: "Collections",
     cell: ({ row }) => (
       <div>
-        {row.original.collections.map((collection) => (
-          <p key={collection._id} className="text-sm">
-            {collection.title}
-          </p>
-        ))}
+        {row.original.collections
+          .map((collection) => collection.title)
+          .join(", ")}
       </div>
     ),
+  },
+  {
+    accessorKey: "price",
+    header: "Price ($)",
+  },
+  {
+    accessorKey: "expense",
+    header: "Expense ($)",
   },
   {
     id: "actions",
