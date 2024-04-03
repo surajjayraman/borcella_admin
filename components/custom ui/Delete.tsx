@@ -18,10 +18,11 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 
 interface DeleteProps {
+  item: string;
   id: string;
 }
 
-const Delete: React.FC<DeleteProps> = ({ id }) => {
+const Delete: React.FC<DeleteProps> = ({ item, id }) => {
   const [loading, setLoading] = useState(true);
 
   const onDelete = async () => {
@@ -31,7 +32,7 @@ const Delete: React.FC<DeleteProps> = ({ id }) => {
       });
 
       if (res.ok) {
-        window.location.href = ("/collections");
+        window.location.href = "/collections";
         toast.success("Collection deleted successfully.");
       }
     } catch (error) {
