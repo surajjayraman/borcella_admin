@@ -1,5 +1,6 @@
 "use client";
 
+import Loader from "@/components/custom ui/Loader";
 import { useEffect, useState } from "react";
 
 const Products = () => {
@@ -8,15 +9,24 @@ const Products = () => {
 
   useEffect(() => {
     const getProducts = async () => {
-      const res = await fetch("/api/products");
-      const data = await res.json();
-      setProducts(data);
-      setLoading(false);
+      try {
+        const res = await fetch("/api/products", {
+          method: "GET",
+        });
+        const data = await res.json();
+        setProducts(data);
+        setLoading(false);
+      } catch (error) {
+        console.log("products_GET", error);
+      }
     };
 
     getProducts();
   }, []);
-  return <div>Products page</div>;
+    return loading ? <Loader /> : (
+        <div className="px-10 py-5">Products page</div>
+        
+    );
 };
 
 export default Products;
