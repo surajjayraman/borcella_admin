@@ -1,7 +1,31 @@
-import React from "react";
+"use client";
+
+import Loader from "@/components/custom ui/Loader";
+import ProductForm from "@/components/products/ProductForm";
+import React, { useEffect, useState } from "react";
 
 const ProductDetails = ({ params }: { params: { productId: string } }) => {
-  return <div>ProductDetails</div>;
+  const [loading, setLoading] = useState(true);
+  const [productDetails, setProductDetails] = useState<ProductType | null>(
+    null
+  );
+  useEffect(() => {
+    const getProductDetails = async () => {
+      try {
+        const res = await fetch(`/api/products/${params.productId}`, {
+          method: "GET",
+        });
+        const data = await res.json();
+        setProductDetails(data);
+        setLoading(false);
+      } catch (err) {
+        console.log("[productId_GET]", err);
+      }
+    };
+    getProductDetails();
+  }, [params.productId]);
+
+  return loading ? <Loader /> : <ProductForm initialData={productDetails} />;
 };
 
 export default ProductDetails;

@@ -11,7 +11,7 @@ export const GET = async (
     await connectToDB();
 
     const product = await Product.findById(params.productId).populate({
-      path: "collection",
+      path: "collections",
       model: Collection,
     });
 
