@@ -1,6 +1,7 @@
 import Collection from "@/lib/models/Collection";
 import Product from "@/lib/models/Product";
 import connectToDB from "@/lib/mongoDB";
+import { request } from "http";
 import { NextRequest, NextResponse } from "next/server";
 
 export const GET = async (
@@ -28,3 +29,13 @@ export const GET = async (
     return new NextResponse(JSON.stringify(error), { status: 500 });
   }
 };
+
+export const POST = async (request: NextRequest, { params }: { params: { productId: string } }) => {
+  try {
+    await connectToDB();
+    
+  }catch(error){
+    console.log("productId_POST", error);
+    return new NextResponse(JSON.stringify(error), { status: 500 });
+  }
+}
