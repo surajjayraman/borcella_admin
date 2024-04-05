@@ -106,7 +106,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ initialData }) => {
 
     try {
       const url = initialData
-        ? `/api/products/${params.collectionId}`
+        ? `/api/products/${initialData._id}`
         : "/api/products";
 
       const res = await fetch(url, {
