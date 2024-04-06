@@ -83,7 +83,7 @@ export const POST = async (
     // included in previous data, but not included in the new data
 
     // Update collections
-    await Promise.all([
+    const collection = await Promise.all([
       // Update added collections with this product
       ...addedCollections.map((collectionId: string) =>
         Collection.findByIdAndUpdate(collectionId, {
@@ -98,6 +98,8 @@ export const POST = async (
         })
       ),
     ]);
+
+    await Promise.all(collection.map((c) => c.save()));
 
     // Update product
     const updatedProduct = await Product.findByIdAndUpdate(
