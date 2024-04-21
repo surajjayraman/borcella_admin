@@ -66,7 +66,7 @@ const CollectionForm: React.FC<CollectionFormProps> = ({ initialData }) => {
 
     try {
       const url = initialData
-        ? `/api/collections/${params.collectionId}`
+        ? `/api/collections/${initialData._id}`
         : "/api/collections";
 
       const res = await fetch(url, {
