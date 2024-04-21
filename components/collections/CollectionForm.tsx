@@ -3,20 +3,19 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { useRouter } from "next/navigation";
+
+import { Separator } from "../ui/separator";
 import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useParams, useRouter } from "next/navigation";
-
-import { Separator } from "../ui/separator";
 import { Textarea } from "../ui/textarea";
 import ImageUpload from "../custom ui/ImageUpload";
 import { useState } from "react";
@@ -30,15 +29,14 @@ const formSchema = z.object({
 });
 
 interface CollectionFormProps {
-  initialData?: CollectionType | null;
+  initialData?: CollectionType | null; //Must have "?" to make it optional
 }
 
 const CollectionForm: React.FC<CollectionFormProps> = ({ initialData }) => {
   const router = useRouter();
-  const params = useParams();
-  const [loading, setLoading] = useState(true);
 
-  // 1. Define your form.
+  const [loading, setLoading] = useState(false);
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: initialData
@@ -60,33 +58,24 @@ const CollectionForm: React.FC<CollectionFormProps> = ({ initialData }) => {
     }
   };
 
-  // 2. Define a submit handler.
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    console.log(values);
-
     try {
+      setLoading(true);
       const url = initialData
         ? `/api/collections/${initialData._id}`
         : "/api/collections";
-
       const res = await fetch(url, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
         body: JSON.stringify(values),
       });
-
       if (res.ok) {
-        toast.success(
-          `Collection ${initialData ? "updated" : "created"} successfully`
-        );
+        setLoading(false);
+        toast.success(`Collection ${initialData ? "updated" : "created"}`);
         window.location.href = "/collections";
         router.push("/collections");
-        setLoading(false);
       }
     } catch (err) {
-      console.log("[CollectionForm_onSubmit]", err);
+      console.log("[collections_POST]", err);
       toast.error("Something went wrong! Please try again.");
     }
   };
@@ -121,7 +110,6 @@ const CollectionForm: React.FC<CollectionFormProps> = ({ initialData }) => {
               </FormItem>
             )}
           />
-
           <FormField
             control={form.control}
             name="description"
@@ -140,7 +128,6 @@ const CollectionForm: React.FC<CollectionFormProps> = ({ initialData }) => {
               </FormItem>
             )}
           />
-
           <FormField
             control={form.control}
             name="image"
@@ -158,15 +145,14 @@ const CollectionForm: React.FC<CollectionFormProps> = ({ initialData }) => {
               </FormItem>
             )}
           />
-
           <div className="flex gap-10">
             <Button type="submit" className="bg-blue-1 text-white">
               Submit
             </Button>
             <Button
               type="button"
-              className="bg-blue-1 text-white"
               onClick={() => router.push("/collections")}
+              className="bg-blue-1 text-white"
             >
               Discard
             </Button>
