@@ -16,9 +16,12 @@ const CollectionDetails = ({
 
   const getCollectionDetails = async () => {
     try {
-      const res = await fetch(`/api/collections/${params.collectionId}`, {
-        method: "GET",
-      });
+      const res = await fetch(
+        `https://borcella-admin-dashboard-six.vercel.app/api/collections/${params.collectionId}`,
+        {
+          method: "GET",
+        }
+      );
       const data = await res.json();
       setCollectionDetails(data);
       setLoading(false);
