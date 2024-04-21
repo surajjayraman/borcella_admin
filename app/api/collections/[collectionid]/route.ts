@@ -25,9 +25,9 @@ export const GET = async (
     }
 
     return NextResponse.json(collection, { status: 200 });
-  } catch (error) {
-    console.log("collectionId_GET", error);
-    return new NextResponse(JSON.stringify(error), { status: 500 });
+  } catch (err) {
+    console.log("[collectionId_GET]", err);
+    return new NextResponse("Internal error", { status: 500 });
   }
 };
 
